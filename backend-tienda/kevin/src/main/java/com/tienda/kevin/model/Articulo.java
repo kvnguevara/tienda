@@ -57,12 +57,7 @@ public class Articulo {
     List<TieneImagen> imagenes;
 
     public Articulo() {
-        // this.titulo = "";
-        // this.descripcion = "";
-        // this.categoria = "Otros";
-        // this.fechaCreacion = new Date(System.currentTimeMillis());
-        // this.fechaModificado = new Date(System.currentTimeMillis());
-        // this.carritos = new ArrayList<>();
+
         this.compras = new ArrayList<>();
         this.publicaciones = new ArrayList<>();
         this.imagenes = new ArrayList<>();

@@ -1,4 +1,4 @@
-package com.alexis.compumercado.controller;
+package com.tienda.kevin.controller;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
@@ -20,18 +20,14 @@ public class PrincipalController implements ErrorController {
             "/admin/carrito",
             "/comprar/{rnart}/{nomarticulo}",
             "/pago/{rnart}",
-            "/vender",
+            "/producto",
             "/editar/{idpublicacion}",
             "/error",
             "/no-encontrado"
 
     })
-    public String  index() {
+    public String index() {
         return "index";
     }
 
-    @Override
-    public String getErrorPath() {
-        return null;
-    }
 }
