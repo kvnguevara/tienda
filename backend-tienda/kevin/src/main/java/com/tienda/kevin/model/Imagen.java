@@ -1,10 +1,21 @@
 package com.tienda.kevin.model;
 
 import javax.persistence.*;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.sql.Date;
 
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name = "imagen")
+/**
+ * Clase o entidad que contiene la informacion de la imagen
+ * 
+ * @author Kevin Guevara
+ */
 public class Imagen {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,38 +31,4 @@ public class Imagen {
     @ManyToOne(cascade = CascadeType.ALL)
     TieneImagen articuloId;
 
-    public Imagen() {
-    }
-
-    public Long getIdImagen() {
-        return idImagen;
-    }
-
-    public void setIdImagen(Long idImagen) {
-        this.idImagen = idImagen;
-    }
-
-    public String getNombreArchivo() {
-        return nombreArchivo;
-    }
-
-    public void setNombreArchivo(String nombreArchivo) {
-        this.nombreArchivo = nombreArchivo;
-    }
-
-    public Date getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
-
-    public TieneImagen getArticuloId() {
-        return articuloId;
-    }
-
-    public void setArticuloId(TieneImagen articuloId) {
-        this.articuloId = articuloId;
-    }
 }

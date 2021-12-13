@@ -2,8 +2,19 @@ package com.tienda.kevin.model;
 
 import javax.persistence.*;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name = "data_id")
+/**
+ * Clase dataid, donde se almacena los usuarios,articulos y publicaciones que
+ * hace.
+ * Esta formada por id,usuario,articulo, publicacion(fk)
+ * * @author Kevin Guevara
+ */
 public class DataId {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,38 +29,4 @@ public class DataId {
     @Column(name = "publicaciones")
     Long ultimaPublicacion;
 
-    public DataId() {
-    }
-
-    public Long getIdData() {
-        return idData;
-    }
-
-    public void setIdData(Long idData) {
-        this.idData = idData;
-    }
-
-    public Long getUltimoUsuario() {
-        return ultimoUsuario;
-    }
-
-    public void setUltimoUsuario(Long ultimo_usuario) {
-        this.ultimoUsuario = ultimo_usuario;
-    }
-
-    public Long getUltimoArticulo() {
-        return ultimoArticulo;
-    }
-
-    public void setUltimoArticulo(Long ultimo_articulo) {
-        this.ultimoArticulo = ultimo_articulo;
-    }
-
-    public Long getUltimaPublicacion() {
-        return ultimaPublicacion;
-    }
-
-    public void setUltimaPublicacion(Long ultimaPublicacion) {
-        this.ultimaPublicacion = ultimaPublicacion;
-    }
 }

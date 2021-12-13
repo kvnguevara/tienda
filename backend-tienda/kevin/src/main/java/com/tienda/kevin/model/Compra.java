@@ -1,10 +1,19 @@
 package com.tienda.kevin.model;
 
 import javax.persistence.*;
+
+import lombok.Data;
+
 import java.sql.Date;
 
 @Entity
+@Data
 @Table(name = "compra")
+/**
+ * Clase Compra o pedido, es donde se almacena las compra de los usuarios.
+ * Esta formada por precio, cantidadm fecha, id pedido,
+ * * @author Kevin Guevara
+ */
 public class Compra {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -12,7 +21,7 @@ public class Compra {
     Long idCompra;
 
     @Column(name = "precio")
-    Double precio; // precio en el momento de la compra
+    Double precio;
 
     @Column(name = "cantidad")
     Integer cantidad;
@@ -38,66 +47,10 @@ public class Compra {
         this.precio = 0.0;
     }
 
-    public Long getIdCompra() {
-        return idCompra;
-    }
-
-    public void setIdCompra(Long idCompra) {
-        this.idCompra = idCompra;
-    }
-
-    public CuentaUsuario getCompradorId() {
-        return compradorId;
-    }
-
-    public void setCompradorId(CuentaUsuario compradorId) {
-        this.compradorId = compradorId;
-    }
-
-    public CuentaUsuario getVendedorId() {
-        return vendedorId;
-    }
-
-    public void setVendedorId(CuentaUsuario vendedorId) {
-        this.vendedorId = vendedorId;
-    }
-
-    public Articulo getArticuloId() {
-        return articuloId;
-    }
-
-    public void setArticuloId(Articulo articuloId) {
-        this.articuloId = articuloId;
-    }
-
-    public Double getPrecio() {
-        return precio;
-    }
-
     public String getPrecioStr() {
         String precio_str = String.valueOf(precio);
         precio_str = precio_str.endsWith(".0") ? precio_str.substring(0, precio_str.length() - 2) : precio_str;
         return precio_str;
-    }
-
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
-
-    public Integer getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public Date getFechaCompra() {
-        return fechaCompra;
-    }
-
-    public void setFechaCompra(Date fechaCompra) {
-        this.fechaCompra = fechaCompra;
     }
 
     @Override

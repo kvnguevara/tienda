@@ -53,19 +53,6 @@ const Articulo = (props) => {
           <span className="articulo__titulo dblock">{props.titulo}</span>
         </div>
       </a>
-      {/* <div className="articulo__boton-comprar dflex">
-				<span className="agregar-carrito cursor-pointer">
-					<i className="fas fa-shopping-cart"></i>
-					<span
-						className="link-menu-agregar cursor-pointer box-shadow-1"
-						onClick={e => agregarCarrito(props.idp)}>
-						Agregar al carrito
-					</span>
-				</span>
-				<a className="comprar-articulo dblock a-limpio" href={"/pago/"+props.idp}>
-					COMPRAR
-				</a>
-			</div> */}
     </div>
   );
 };
@@ -104,7 +91,9 @@ const Galeria = (props) => {
 
   if (error)
     return (
-      <div className="talign-center">No se pudo conectar con el servidor.</div>
+      <div className="talign-center">
+        Error con la conexion con el Servidor.
+      </div>
     );
   else if (busqueda && !error) return <div className="div-cargando" />;
   else if (!busqueda && !error && listado.length === 0)

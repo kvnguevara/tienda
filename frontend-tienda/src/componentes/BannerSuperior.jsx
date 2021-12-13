@@ -30,7 +30,7 @@ const BannerNormal = (props) => {
       {redirigir && <Redirigir donde={"/busqueda/" + urlBusqueda} />}
       <div className="banner__logo-busqueda-accesos dflex">
         <a className="a-limpio link-logo" href="/">
-          compumercado
+          Home
         </a>
         <input
           className="banner-input-buscar"
@@ -40,11 +40,8 @@ const BannerNormal = (props) => {
           onKeyDown={(e) => buscarInput(e)}
         />
         <section className="banner__accesos">
-          <a className="banner__acceso a-limpio" href="/vender">
+          <a className="banner__acceso a-limpio" href="/producto">
             PRODUCTO
-          </a>
-          <a className="banner__acceso a-limpio" href="/soporte">
-            SOPORTE
           </a>
           <span className="seccion-cuenta">
             {usr ? (

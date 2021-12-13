@@ -1,17 +1,24 @@
 package com.tienda.kevin.model;
 
 import javax.persistence.*;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name = "articulo")
+/**
+ * Clase articulo que contiene los siguientes atributos
+ * id_articulo,dataid,titulo,url,descripcion,categoria,fechacreacion,fechamodificacion
+ * * @author Kevin Guevara
+ */
 public class Articulo {
-    /*
-     * id_articulo, cantidad, categoria, descripcion, fecha_creacion,
-     * fecha_modificado, precio, titulo
-     */
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_articulo")
@@ -41,12 +48,6 @@ public class Articulo {
     @Column(name = "fecha_modificado")
     Date fechaModificado;
 
-    /*
-     * @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy =
-     * "articuloId")
-     * List<Carrito> carritos;
-     */
-
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "articuloId")
     List<Compra> compras;
 
@@ -55,111 +56,6 @@ public class Articulo {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "articulo")
     List<TieneImagen> imagenes;
-
-    public Articulo() {
-
-        this.compras = new ArrayList<>();
-        this.publicaciones = new ArrayList<>();
-        this.imagenes = new ArrayList<>();
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-
-    public Long getIdArticulo() {
-        return idArticulo;
-    }
-
-    public void setIdArticulo(Long idArticulo) {
-        this.idArticulo = idArticulo;
-    }
-
-    public Long getDataId() {
-        return dataId;
-    }
-
-    public void setDataId(Long dataId) {
-        this.dataId = dataId;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getUrl() {
-        return url;
-    };
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public Date getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
-
-    public Date getFechaModificado() {
-        return fechaModificado;
-    }
-
-    public void setFechaModificado(Date fechaModificado) {
-        this.fechaModificado = fechaModificado;
-    }
-
-    /*
-     * public List<Carrito> getCarritos() {
-     * return carritos;
-     * }
-     * 
-     * public void setCarritos(List<Carrito> carritos) {
-     * this.carritos = carritos;
-     * }
-     */
-
-    public List<Compra> getCompras() {
-        return compras;
-    }
-
-    public void setCompras(List<Compra> compras) {
-        this.compras = compras;
-    }
-
-    public List<Publicacion> getPublicaciones() {
-        return publicaciones;
-    }
-
-    public void setPublicaciones(List<Publicacion> publicaciones) {
-        this.publicaciones = publicaciones;
-    }
-
-    public List<TieneImagen> getImagenes() {
-        return imagenes;
-    }
-
-    public void setImagenes(List<TieneImagen> imagenes) {
-        this.imagenes = imagenes;
-    }
 
     public String tituloURL() {
         final String permitidos = "abcdefghijklmnopqrstuvwxyz0123456789-";

@@ -1,14 +1,23 @@
 package com.tienda.kevin.model;
 
 import javax.persistence.*;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name = "cuenta_usuario")
+/**
+ * Clase o entidad de usuario, esta formada por id,nombre, apellido, email,
+ * password * @author Kevin Guevara
+ */
 public class CuentaUsuario {
-    /* email, apellido, fecha_creacion, fecha_modificado, nombre, passwrd */
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_cuenta")
@@ -49,115 +58,6 @@ public class CuentaUsuario {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "autorId")
     List<Publicacion> publicaciones;
-
-    public CuentaUsuario() {
-        this.compras = new ArrayList<>();
-        this.publicaciones = new ArrayList<>();
-    }
-
-    public Long getIdCuentaUsuario() {
-        return idCuentaUsuario;
-    }
-
-    public void setIdCuentaUsuario(Long idCuentaUsuario) {
-        this.idCuentaUsuario = idCuentaUsuario;
-    }
-
-    public Long getDataId() {
-        return dataId;
-    }
-
-    public void setDataId(Long dataId) {
-        this.dataId = dataId;
-    }
-
-    public Date getFechaModificado() {
-        return fechaModificado;
-    }
-
-    public void setFechaModificado(Date fechaModificado) {
-        this.fechaModificado = fechaModificado;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public String getPasswrd() {
-        return passwrd;
-    }
-
-    public void setPasswrd(String passwrd) {
-        this.passwrd = passwrd;
-    }
-
-    public Integer getArticulos() {
-        return articulos;
-    }
-
-    public void setArticulos(Integer articulos) {
-        this.articulos = articulos;
-    }
-
-    public Date getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
-
-    public List<Carrito> getCarritos() {
-        return carritos;
-    }
-
-    public void setCarritos(List<Carrito> carritos) {
-        this.carritos = carritos;
-    }
-
-    public List<Compra> getCompras() {
-        return compras;
-    }
-
-    public void setCompras(List<Compra> compras) {
-        this.compras = compras;
-    }
-
-    public List<Compra> getVentas() {
-        return ventas;
-    }
-
-    public void setVentas(List<Compra> ventas) {
-        this.ventas = ventas;
-    }
-
-    public List<Publicacion> getPublicaciones() {
-        return publicaciones;
-    }
-
-    public void setPublicaciones(List<Publicacion> publicaciones) {
-        this.publicaciones = publicaciones;
-    }
 
     @Override
     public String toString() {

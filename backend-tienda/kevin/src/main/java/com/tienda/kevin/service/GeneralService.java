@@ -3,20 +3,25 @@ package com.tienda.kevin.service;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Interface, GeneralService,
+ * Se indica los metodos que se utilizan en los serivicios de cada Entidad.
+ * 
+ */
 public interface GeneralService<T, ID extends Serializable> {
-    // listar
+    /** Listar */
     List<T> listar();
 
-    // buscar por id
+    /** buscar */
     T buscar(ID id);
 
-    // agregar
+    /** Agregar */
     void agregar(T nuevoT);
 
-    // modificar
+    /** Modificar */
     void modificar(ID id, T t);
 
-    // borrar
+    /** Borrar */
     void borrar(ID id);
 
 }

@@ -367,8 +367,8 @@ public class TiendaRESTController implements ServletContextAware {
         cuenta.setFechaCreacion(new Date(System.currentTimeMillis()));
         cuenta.setFechaModificado(new Date(System.currentTimeMillis()));
         cuenta.setDataId(dataId.getUltimoUsuario());
-        cuentaUsuarioService.agregar(cuenta);
-        dataIdService.agregar(dataId);
+        cuentaUsuarioService.agregar(cuenta); // insertar los datos en la BBDD
+        dataIdService.agregar(dataId); // inserta los datos
 
         // Metodo para crear una carpeta para las publicaciones de cada usuario
         String cuenta_data = String.valueOf(cuenta.getDataId());
@@ -502,7 +502,7 @@ public class TiendaRESTController implements ServletContextAware {
         return new ResponseEntity<>("11", HttpStatus.NOT_FOUND);
     }
 
-    /* agregar al carrito */
+    /* Metodo para agregar un producto al Carrito */
     @RequestMapping(value = "/agregar-carrito", method = RequestMethod.POST)
     public ResponseEntity<String> agregarAlCarrito(@RequestParam("idp") String idp,
             @RequestParam("dataid") String dataId) {
@@ -530,7 +530,7 @@ public class TiendaRESTController implements ServletContextAware {
         return new ResponseEntity<>("0", HttpStatus.OK);
     }
 
-    /* borrar item del carrito */
+    /* Metodo para borrar un producto del Carrito de la compra */
     @RequestMapping(value = "/borrar-item-carrito", method = RequestMethod.POST)
     public ResponseEntity<String> borrarItemCarrito(@RequestParam("idpublicacion") String idpublicacion,
             @RequestParam("dataidusuario") String dataIdusuario) {
@@ -546,7 +546,11 @@ public class TiendaRESTController implements ServletContextAware {
         return new ResponseEntity<>("0", HttpStatus.OK);
     }
 
-    /* ver compras realizadas */
+    /*
+     * Metodo que obtiene la compras de un usuario
+     * 
+     * @param id: id que identifica al usario, y la compra
+     */
     @RequestMapping(value = "/compras", method = RequestMethod.POST)
     public ResponseEntity<String> verCompras(@RequestParam("dataid") String dataIdUsuario) {
         String sql = "SELECT c FROM Compra c WHERE c.compradorId.dataId=:id";
@@ -596,7 +600,7 @@ public class TiendaRESTController implements ServletContextAware {
         return new ResponseEntity<>(sb.toString(), HttpStatus.OK);
     }
 
-    /* visualizar las ventas */
+    /* Metodo de visualizar las ventas de los productos */
     @RequestMapping(value = "/ventas", method = RequestMethod.POST)
     public ResponseEntity<String> verVentas(@RequestParam("dataid") String dataIdUsuario) {
         String sql = "SELECT c FROM Compra c WHERE c.vendedorId.dataId=:id";
@@ -647,7 +651,7 @@ public class TiendaRESTController implements ServletContextAware {
         return new ResponseEntity<>(sb.toString(), HttpStatus.OK);
     }
 
-    /* ver publicaciones realizadas */
+    /* Metodo para ver las publicaciones que han hecho los usuarios */
     @RequestMapping(value = "/publicaciones", method = RequestMethod.POST)
     public ResponseEntity<String> verPublicaciones(@RequestParam("dataid") String dataIdUsuario) {
         String sql = "SELECT p FROM Publicacion p WHERE p.autorId.dataId=:id";
@@ -687,7 +691,7 @@ public class TiendaRESTController implements ServletContextAware {
         return new ResponseEntity<>(sb.toString(), HttpStatus.OK);
     }
 
-    /* ver carrito de compras */
+    /* Metodo para ver el carrito de la compra */
     @RequestMapping(value = "/carrito", method = RequestMethod.POST)
     public ResponseEntity<String> verCarrito(@RequestParam("dataid") String dataIdUsuario) {
         List usuarios = entityManager.createQuery("SELECT c FROM CuentaUsuario c WHERE c.dataId=:id")
@@ -703,11 +707,11 @@ public class TiendaRESTController implements ServletContextAware {
                 .getResultList();
 
         Double total = 0.0;
-        // StringBuilder sb = new StringBuilder("{\"items\":[");
+
         StringBuilder sb = new StringBuilder("[");
         for (Object o : carritos) {
             Carrito carrito = (Carrito) o;
-            Publicacion publicacion = carrito.getPublicacionIdId();
+            Publicacion publicacion = carrito.getPublicacionId();
 
             Imagen imagen = ((TieneImagen) publicacion.getArticuloId().getImagenes().get(0)).getImagen();
             // Long dataId = Long.parseLong(dataIdUsuario);
@@ -734,17 +738,11 @@ public class TiendaRESTController implements ServletContextAware {
         if (sb.toString().endsWith(","))
             sb.deleteCharAt(sb.length() - 1);
         sb.append("]");
-        // String precio_str = String.valueOf(total);
-        // precio_str = precio_str.endsWith(".0") ? precio_str.substring(0,
-        // precio_str.length() - 2) : precio_str;
 
-        // if(sb.charAt(sb.length()-1) == ',') sb.deleteCharAt(sb.length() - 1);
-        // sb.append("], \"total\": \"").append(precio_str).append("\"}");
         return new ResponseEntity<>(sb.toString(), HttpStatus.OK);
     }
 
-    /////////////////////////////////////////////////////
-
+    /** Metodo para guardar las imagenes */
     private boolean guardarArchivo(MultipartFile archivo, String carpetaUsuario, String carpetaPublicacion,
             String nombreArchivo) {
         try {
@@ -780,6 +778,7 @@ public class TiendaRESTController implements ServletContextAware {
         return generarJSON(publicacion, false);
     }
 
+    /** Metodo para generar el generarJSON y asi pasarlo al front-end */
     private String generarJSON(Publicacion publicacion, boolean usuarioTieneArticuloEnSuCarrito) {
         StringBuilder sb = new StringBuilder("{");
 
@@ -802,7 +801,7 @@ public class TiendaRESTController implements ServletContextAware {
 
         sb.append("\"imagenes\": [");
 
-        // imagenes
+        // Generar la imagen
         Long autor_dataid = publicacion.getAutorId().getDataId();
         List imagenes = publicacion.getArticuloId().getImagenes();
         for (int i = 0; i < imagenes.size(); i++) {
@@ -819,6 +818,8 @@ public class TiendaRESTController implements ServletContextAware {
         sb.append("}");
         return sb.toString();
     }
+
+    /** Metoodo para encriptar los textos, de descripcion */
 
     @Override
     public void setServletContext(ServletContext servletContext) {
@@ -842,6 +843,8 @@ public class TiendaRESTController implements ServletContextAware {
             return null;
         }
     }
+
+    /** Metodo para poder desencriptar los textos */
 
     private String desencriptar(String texto) {
         try {

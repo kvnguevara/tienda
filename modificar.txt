@@ -1,3 +1,0 @@
-1-vender --> producto
-2-Categorias-->implementar
-3-Cambiar la pagina de vender.

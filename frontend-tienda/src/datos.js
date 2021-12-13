@@ -1,13 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  Question,
-  Keyboard,
-  Display,
-  Controller,
-  Laptop,
-  Cpu,
-  Printer,
-} from "react-bootstrap-icons";
+import { Dice6, AspectRatio, Lamp, Earbuds, Key } from "react-bootstrap-icons";
 
 /* crypto-js */
 import CryptoJS from "crypto-js";
@@ -17,9 +9,6 @@ import { Redirect } from "react-router-dom";
 
 // *********** //
 
-/* URLs */
-// const baseURL = "http://localhost:8080/compumercado/data";
-// const baseURL = "compumercado/data";
 const baseURL = "";
 const crearCuentaURL = "/crear-cuenta";
 const iniciarSesionURL = "/ingresar";
@@ -38,25 +27,19 @@ const inicioURL = "/publicaciones-inicio"; // articulos
 
 /* categorias de productos */
 const categorias = [
-  { icono: <Question />, titulo: "General", categoria: "general" } /* 0 */,
   {
-    icono: <Keyboard />,
-    titulo: "Accesorios de PC",
-    categoria: "accesorios-pc",
+    icono: <Dice6 />,
+    titulo: "Juegos",
+    categoria: "juegos",
   } /* 1 */,
-  { icono: <Display />, titulo: "Monitores", categoria: "monitores" } /* 3 */,
+  { icono: <AspectRatio />, titulo: "Marco", categoria: "marcos" } /* 2*/,
   {
-    icono: <Controller />,
-    titulo: "Consolas y videojuegos",
-    categoria: "consolas-videojuegos",
-  } /* 4 */,
-  { icono: <Laptop />, titulo: "Laptops", categoria: "laptops" } /* 5 */,
-  {
-    icono: <Cpu />,
-    titulo: "Componentes de PC",
-    categoria: "componentes-pc",
-  } /* 6 */,
-  { icono: <Printer />, titulo: "Impresoras", categoria: "impresoras" } /* 7 */,
+    icono: <Lamp />,
+    titulo: "Lamparas",
+    categoria: "lamparas",
+  } /* 3 */,
+  { icono: <Key />, titulo: "Llaveros", categoria: "llaveros" } /* 4*/,
+  { icono: <Earbuds />, titulo: "Pendientes", categoria: "pendiente" } /*5*/,
 ];
 
 const Redirigir = (props) => {
