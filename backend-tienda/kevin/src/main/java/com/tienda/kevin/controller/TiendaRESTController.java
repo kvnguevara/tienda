@@ -33,6 +33,7 @@ import com.tienda.kevin.service.ImagenService;
 import com.tienda.kevin.service.PublicacionService;
 import com.tienda.kevin.service.TieneImagenService;
 
+import java.io.Console;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -107,6 +108,25 @@ public class TiendaRESTController implements ServletContextAware {
         }
 
         return new ResponseEntity<>("-1", HttpStatus.OK);
+    }
+
+    /*
+     * @kvnguevara
+     * Funcion que nos ayuda a mostrar la edicion del articulo
+     */
+    @RequestMapping(value = "/editar", method = RequestMethod.POST)
+    public ResponseEntity<String> editarPublicacion(@RequestParam("idpublicacion") String idpublicacion,
+            @RequestParam(value = "cantidad") String cantidad) {
+        System.out.println(idpublicacion);
+        System.out.println(cantidad);
+        List publicacion = entityManager.createQuery("UPDATE SET cantidad := cantidad WHERE p.idPublicacion = :id")
+                .setParameter("cantidad", Integer.parseInt(cantidad))
+                .setParameter("id", Long.parseLong(idpublicacion))
+                .getResultList();
+
+        publicacionService.agregar((Publicacion) publicacion.get(0));
+        return new ResponseEntity<>("0", HttpStatus.OK);
+
     }
 
     /*
@@ -819,7 +839,7 @@ public class TiendaRESTController implements ServletContextAware {
         return sb.toString();
     }
 
-    /** Metoodo para encriptar los textos, de descripcion */
+    /** Metodo para encriptar los textos, de descripcion */
 
     @Override
     public void setServletContext(ServletContext servletContext) {

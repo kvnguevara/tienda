@@ -38,7 +38,7 @@ import Admin from "./componentes/Admin";
 import Comprar from "./componentes/Comprar";
 import PagarCompra from "./componentes/PagarCompra";
 import Vender from "./componentes/Producto";
-
+import Editar from "./componentes/EditarPublicacion";
 const RoutingDesconectar = () => {
   Cookies.remove("usr");
   return <Redirigir donde="/" />;
@@ -88,6 +88,7 @@ const RoutingNormal = (props) => {
         ) : (
           <Redirigir donde="/ingresar" />
         ))}
+      {props.tipo === 5 && <Editar usr={props.usrid} />}
     </React.Fragment>
   );
 };
@@ -229,15 +230,10 @@ function App() {
               )}
             />
             <Route
-              path="/editar/:idpublicacion"
+              path="admin/editar/:idpublicacion"
               exact
               render={(_) => (
-                <RoutingNormal
-                  tipo={4}
-                  usrid={usr}
-                  conectado={conectado}
-                  usr={usr}
-                />
+                <RoutingNormal tipo={5} usrid={usr} conectado={conectado} />
               )}
             />
             <Route

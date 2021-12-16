@@ -9,6 +9,6 @@ Para la parte del Cliente, he utilizado la libreria de JavaScript REACT.
 En la parte de gestion de base de datos, esta gestionada por MYSQL.
 
 Back-end: si lo abren el proyecto con VSCode, es necesario ejecutar el plugin de springboot.
-o abrir una terminal y posicionarse en la carpeta de backend y ejecutar el siguiente comando .\ mvnw run
+o abrir una terminal y posicionarse en la carpeta de backend y ejecutar el siguiente comando .\ mvnw run:start
 
 Front-end: Abren una terminal, y se posicionan en la carpeta del frontend, allí ejecutan el comando npm install, para bajar los modulos de node, una vez instalado, ejecutan npm start.

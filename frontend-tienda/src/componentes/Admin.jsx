@@ -134,9 +134,9 @@ const Informacion = (props) => {
                 )}
                 {sel === "2" && (
                   <>
-                    <a className="chip" href={"/editar/" + dato.id}>
+                    {/* <a className="chip" href={"editar/" + dato.id}>
                       Editar publicacion
-                    </a>
+                    </a> */}
                     <span className="chip" onClick={(_) => setBorrar(true)}>
                       Eliminar
                     </span>

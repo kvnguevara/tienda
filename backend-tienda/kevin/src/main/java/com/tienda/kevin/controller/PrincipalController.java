@@ -21,7 +21,7 @@ public class PrincipalController implements ErrorController {
             "/comprar/{rnart}/{nomarticulo}",
             "/pago/{rnart}",
             "/producto",
-            "/editar/{idpublicacion}",
+            "/admin/editar/{idpublicacion}",
             "/error",
             "/no-encontrado"
 
